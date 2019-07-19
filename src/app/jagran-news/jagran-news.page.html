@@ -1,0 +1,189 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>JagranNews</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list no-lines>
+
+        <ion-item-sliding >
+    
+          <ion-item *ngFor="let todo of todos">
+    
+            {{todo.title}}
+    
+          </ion-item>
+          </ion-item-sliding>
+          </ion-list>
+
+    <ion-item *ngFor="let key of objectKeys(items) | slice:1:2">
+        <ion-label>
+            {{key}}
+            </ion-label>
+          </ion-item>
+     
+    <ion-slides [options]="slideOpts">
+      
+    <ion-slide *ngFor="let entertainment of entertainment">
+     
+    <ion-card class="ion-text-left">
+        <!-- <ion-card> -->
+        <ion-card-header>
+          
+          <ion-card-title style="font-size: 16px">{{entertainment.heading}}</ion-card-title>
+        </ion-card-header>
+      
+      
+         
+        <ion-card-content (click)="openDetailsWithState(entertainment.Detail,entertainment.heading)" class="textWrap">
+          
+            {{entertainment.Detail}}
+        
+        </ion-card-content>
+   
+      </ion-card>
+
+    </ion-slide>
+  </ion-slides>
+
+
+  <ion-item *ngFor="let key of objectKeys(items) | slice:2:3">
+      <ion-label>
+          {{key}}
+          </ion-label>
+        </ion-item>
+
+  <ion-slides [options]="slideOpts">
+  <ion-slide   *ngFor="let politics of politics">
+   
+  <ion-card class="ion-text-left">
+      <!-- <ion-card> -->
+      <ion-card-header>
+      
+        <ion-card-title  style="font-size: 16px">{{politics.Heading}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content (click)="openDetailsWithState(politics.Detail,politics.Heading)" class="textWrap">
+        
+          {{politics.Detail}}
+      
+      </ion-card-content>
+    
+    </ion-card>
+  </ion-slide>
+
+</ion-slides>
+
+
+
+<ion-item  *ngFor="let key of objectKeys(items) | slice:3:4">
+    <ion-label>
+        {{key}}
+        </ion-label>
+      </ion-item>
+    
+<ion-slides [options]="slideOpts">
+    <ion-slide   *ngFor="let cricket of cricket">
+     
+    <ion-card class="ion-text-left">
+        <!-- <ion-card> -->
+        <ion-card-header>
+        
+          <ion-card-title  style="font-size: 16px">{{cricket.heading}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content (click)="openDetailsWithState(cricket.Detail,cricket.heading)" class="textWrap">
+          
+            {{cricket.Detail}}
+        
+        </ion-card-content>
+     
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+
+  <ion-item  *ngFor="let key of objectKeys(items) | slice:4:5">
+      <ion-label>
+          {{key}}
+          </ion-label>
+        </ion-item>
+  
+  <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let business of business">
+       
+      <ion-card class="ion-text-left">
+          <!-- <ion-card> -->
+          <ion-card-header>
+          
+            <ion-card-title  style="font-size: 16px">{{business.heading}}</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content (click)="openDetailsWithState(business.Detail,business.heading)" class="textWrap">
+            
+              {{business.Detail}}
+          
+          </ion-card-content>
+         
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-item  *ngFor="let key of objectKeys(items) | slice:5:6">
+        <ion-label>
+            {{key}}
+            </ion-label>
+          </ion-item>
+
+      
+  <ion-slides [options]="slideOpts">
+      <ion-slide   *ngFor="let technology of technology">
+       
+      <ion-card class="ion-text-left">
+          <!-- <ion-card> -->
+          <ion-card-header>
+          
+            <ion-card-title  style="font-size: 16px">{{technology.heading}}</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content (click)="openDetailsWithState(technology.Detail,technology.heading)" class="textWrap">
+            
+              {{technology.Detail}}
+          
+          </ion-card-content>
+        
+        </ion-card>
+      </ion-slide>
+</ion-slides>
+
+
+</ion-content>
+<!-- <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Clasroom List
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let cr of classrooms" routerLink="/detail/{{cr.id}}">
+        <ion-icon name="desktop" slot="start"></ion-icon>
+        {{cr.class_name}}
+        <div class="item-note" slot="end">
+          {{cr.createdAt | date}}
+        </div>
+      </ion-item>
+    </ion-list>
+   
+      <div *ngIf="selectedItem" padding>
+        You navigated here from <b>{{selectedItem.title }}</b>
+      </div>
+   
+  </ion-content> -->

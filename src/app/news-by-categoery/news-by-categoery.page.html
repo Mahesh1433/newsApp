@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>DETAIL NEWS</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+ 
+</ion-header>
+
+<ion-content>
+    <ion-slides [options]="slideOpts">
+        <ion-slide *ngFor="let news of news">
+        
+          <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>{{categoery}}</ion-card-subtitle>
+                <ion-card-title>{{news.heading}}</ion-card-title>
+              </ion-card-header>
+            
+              <ion-card-content>
+                  {{news.detail}}
+              </ion-card-content>
+            </ion-card>
+
+        </ion-slide>
+       
+      </ion-slides>
+    
+</ion-content>

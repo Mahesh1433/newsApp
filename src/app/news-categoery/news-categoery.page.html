@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>FOLLOWING</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+    <ion-row class="gridRow" align-items-center>
+      
+        <ion-col class="" align-self-center size="6" *ngFor="let key of objectKeys(items) | slice:0:5"  (click)="getNewsByCategoery(key)">
+        
+       
+          <img class="gridColImg double-bounce1" src="/assets/{{key}}.jpg">
+         
+         <p class="ColTitle">{{key}}</p>
+        
+        </ion-col>
+        
+      <!-- </ion-row>
+      <ion-row class="gridRow" align-items-center>
+          <ion-col align-self-center size="6">
+          <img class="gridColImg" src="/assets/cricket.jpg">
+           <p class="ColTitle">Cricket</p>
+          </ion-col>
+          <ion-col align-self-center size="6">
+              <img class="gridColImg" src="/assets/business.jpg">
+              <p class="ColTitle">Business</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="gridRow" align-items-center>
+            <ion-col align-self-center size="6">
+            <img class="gridColImg" src="/assets/technology.jpg">
+             <p class="ColTitle">Technology</p>
+            </ion-col>
+            -->
+          </ion-row>  
+        <!-- Apologies for using my own face, was the only image I could think of at the time! -->
+    
+       
+</ion-content>

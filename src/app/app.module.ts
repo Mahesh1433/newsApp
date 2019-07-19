@@ -8,11 +8,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NewsCategoeryPage } from './news-categoery/news-categoery.page';
 import { SyncDbService } from './sync-db.service';
+import { NewsByCategoeryPage } from './news-by-categoery/news-by-categoery.page';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [
+   
+    
+  ],
   imports: [BrowserModule,
     HttpClientModule,
     FormsModule,

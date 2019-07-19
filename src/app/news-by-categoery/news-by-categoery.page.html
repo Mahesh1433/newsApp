@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>DETAIL NEWS</ion-title>
-    <ion-buttons slot="start">
+    <ion-title>{{categoery}} News</ion-title>
+    <ion-buttons slot="start" defaultHref="/tabs/tab1">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -9,22 +9,48 @@
 </ion-header>
 
 <ion-content>
-    <ion-slides [options]="slideOpts">
-        <ion-slide *ngFor="let news of news">
-        
-          <ion-card>
-              <ion-card-header>
-                <ion-card-subtitle>{{categoery}}</ion-card-subtitle>
-                <ion-card-title>{{news.heading}}</ion-card-title>
-              </ion-card-header>
-            
-              <ion-card-content>
-                  {{news.detail}}
-              </ion-card-content>
-            </ion-card>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+  <ion-slides (ionSlideReachEnd)="presentToast($event)" [options]="slideOpts"> 
+    <ion-slide *ngFor="let news of todos | slice:startslice:endslice;" pager="true">
+   
+    <ion-card text-left>
+        <!--     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+              <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data..."> -->
+          <ion-card-header>
+            <!-- <ion-card-subtitle text-center>{{categoery}}</ion-card-subtitle> -->
+            <ion-card-title>{{news.heading}}</ion-card-title>
+          </ion-card-header>
 
-        </ion-slide>
+         
+          <ion-card-content>
+                                  
+<ion-text color="success">
+<h6><ion-icon name="time"></ion-icon> {{news.updated}}</h6>
+</ion-text>
+               {{news.detail}}
+                         
+<ion-text color="primary">
+<h6>{{news.source}}</h6>
+</ion-text>
+          </ion-card-content>
        
-      </ion-slides>
+    <!-- </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+        </ion-card>
+
+    </ion-slide>
+   
+  </ion-slides>
     
+ 
+
 </ion-content>

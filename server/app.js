@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var mongo = require('mongodb');
+//var mongo = require('mongodb');
 var request = require('request');
 var cors = require('cors');
 const NodeCouchDb = require('node-couchdb');
-var merge = require('lodash.merge');
+//var merge = require('lodash.merge');
 const app = express();
 
 
@@ -33,32 +33,42 @@ const couch = new NodeCouchDb();
 // not admin party
 const couchAuth = new NodeCouchDb({
   auth: {
-      user: 'mahesh',
-      pass: 'mahesh123'
+      user: 'admin',
+      pass: 'admin123'
   }
 });
 
 
 
-couch.listDatabases().then(function(dbs){
- console.log(dbs)
-});
+// couch.listDatabases().then(function(dbs){
+//  console.log(dbs)
+// });
 
 
-const dbName = "newsdb";
-const viewUrl = "_design/view3/_view/id";
+const dbName = "ubuntudb";
+ const viewUrl = "_design/view3/_view/id";
+
+
+// app.get('/getData', function (req, res) {
+//   console.log("comming here : ");
+//   couch.get(dbName, viewUrl).then(function (data, headers, status) {
+//     res.send(data);
+//     console.log("data is here : "+data);
+// },
+//   function (err) {
+//     console.log(err);
+//   });
+// });
 
 
 app.get('/getData', function (req, res) {
-  console.log("comming here : ");
-  couch.get(dbName, viewUrl).then(function (data, headers, status) {
-    res.send(data);
-    console.log("data is here : "+data);
+ res.send("<h1>WELCOME MAHESH");
 },
   function (err) {
     console.log(err);
   });
-});
+
+
 
 
 
@@ -67,14 +77,14 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // parse form data client
 //app.use(express.static(path.join(__dirname, 'public'))); // 
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+// var MongoClient = require('mongodb').MongoClient;
+// var url = "mongodb://localhost:27017/";
 
 
 
 var CnnApiKey = "te7k5fGXivpr";
-var CnnProjectToken = "tbTVcF961m1J";
-var CnnRunToken = "tYe5_0uKNWSB";
+var CnnProjectToken = "tJyq-5mjiebQ";
+var CnnRunToken = "tskMPcek4m1A";
 
 
 var JagranApiKey = "te7k5fGXivpr";
@@ -134,6 +144,12 @@ var jagranNews;
 //   });
 
 
+
+
+
+
+
+
 // get last run data CNN news
 request({
     uri: 'https://www.parsehub.com/api/v2/projects/'+CnnProjectToken+'/last_ready_run/data',
@@ -145,11 +161,11 @@ request({
     }
   }, function(err, resp, body) {
     this.cnnNews = JSON.parse(body);
-    let cnnBreaking =  this.cnnNews.breaking;
-    let cnnBusiness =  this.cnnNews.business;
-    let cnnEntertainment =  this.cnnNews.entertainment;
-    let cnnPolitics =  this.cnnNews.politics;
-    let cnnSport =  this.cnnNews.sport;
+    let cnnBreaking =  this.cnnNews.Breaking;
+    let cnnBusiness =  this.cnnNews.Business;
+    let cnnEntertainment =  this.cnnNews.Entertainment;
+    let cnnPolitics =  this.cnnNews.Politics;
+    let cnnSport =  this.cnnNews.Sport;
   //  let cnnTechnology =  this.cnnNews.technology;
 
 //console.log(this.cnnNews.business);
@@ -200,138 +216,213 @@ let jagranTechnology =  this.jagranNews.technology;
 //console.log(this.jagranNews.business);
 
 
-var allNews = {Breaking: [...cnnBreaking, ...bccBreaking, ...jagranBreaking], Business: [...cnnBusiness, ...bccBusiness, ...jagranBusiness], Entertainment: [...cnnEntertainment, ...bccEntertainment, ...jagranEntertainment], Politics: [...cnnPolitics, ...bccPolitics, ...jagranPolitics],
-   Sport: [...cnnSport, ...bccSport], Technology: [...bccTechnology, ...jagranTechnology]};
-
-//console.log(allNews);
-
-
-
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-       // var dbo = db.db("newsdb2");
-       var myobj = allNews;
-
-couch.insert("testing",myobj).then(({data, headers, status}) => {
-     console.log("data : "+data);
-  // data is json response
-  // headers is an object with all response headers
-  // status is statusCode number
-}, err => {
-  // either request error occured
-  // ...or err.code=EDOCCONFLICT if document with the same id already exists
-});
-});
+var allNews = {Breaking: [...cnnBreaking,...bccBreaking,...jagranBreaking], Business: [...cnnBusiness,...bccBusiness,...jagranBusiness], Entertainment: [...cnnEntertainment,...bccEntertainment, ...jagranEntertainment], Politics: [...cnnPolitics,...bccPolitics, ...jagranPolitics],
+   Sport: [...cnnSport,...bccSport], Technology: [...bccTechnology,...jagranTechnology]};
+   allNews.Breaking.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
+   allNews.Business.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
+   allNews.Entertainment.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
+   allNews.Politics.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
+   allNews.Sport.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
+   allNews.Technology.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
 
 
-});
-});
-//var obj4 = {business: [...cnnObj, ...jagranObj]};
+   //console.log(allNews);
+
+   //filter on breaking news array 
+
+   var breakingArray = allNews.Breaking;
+  
+   let breakingFilter = breakingArray.filter(breakingArray => {
+     return  breakingArray.detail != undefined;
+   })
+   var breakingData = breakingFilter;
+  // console.log(breakingData);
+
+
+   //filter on business news array 
+   
+   var businessArray = allNews.Business;
+  
+   let businessFilter = businessArray.filter(businessArray => {
+     return  businessArray.detail != undefined;
+   })
+
+    var businessData = businessFilter;
+   //console.log(businessData);
+
+   
+   //filter on Entertainment news array 
+   
+   var entertainmentArray = allNews.Entertainment;
+  
+   let entertainmentFilter = entertainmentArray.filter(entertainmentArray => {
+     return  entertainmentArray.detail != undefined;
+   })
+   var entertainmentData = entertainmentFilter;
+  // console.log(entertainmentData);
+
+   
+   //filter on Politics news array 
+   
+   var politicsArray = allNews.Politics;
+  
+   let politicsFilter = politicsArray.filter(politicsArray => {
+     return  politicsArray.detail != undefined;
+   })
+   var politicsData = politicsFilter;
+ //  console.log(politicsData);
+
+   //filter on Sport news array 
+   
+   var sportArray = allNews.Sport;
+  
+   let sportFilter = sportArray.filter(sportArray => {
+     return  sportArray.detail != undefined;
+   })
+   var sportData = sportFilter;
+   //console.log(sportData);
+
+   //filter on Sport news array 
+   
+   var technologyArray = allNews.Technology;
+  
+   let technologyFilter = technologyArray.filter(technologyArray => {
+     return  technologyArray.detail != undefined;
+   })
+   var technologyData = technologyFilter;
+  // console.log(technologyData);
+
+var finalFilterAllData = {Breaking: breakingData, Business: businessData, Entertainment: entertainmentData,  Politics: politicsData, Sport: sportData, Technology: technologyData}
+
+ //console.log(finalFilterAllData);
 
 
 //     MongoClient.connect(url, function(err, db) {
 //         if (err) throw err;
 //        // var dbo = db.db("newsdb2");
-//        var myobj = JSON.parse(body);
+//        var myobj = allNews;
 
-// couch.insert("newsdb",myobj).then(({data, headers, status}) => {
-//      console.log("data : "+data);
-//   // data is json response
-//   // headers is an object with all response headers
-//   // status is statusCode number
-// }, err => {
-//   // either request error occured
-//   // ...or err.code=EDOCCONFLICT if document with the same id already exists
-// });
- });
-      
-//       //  myobj["Name"]="Mahesh";
-//       //  myobj['theTeam']={"teamId":"4","status":"pending"};
-//       //  console.log("new Obj : "+myobj.theTeam);
-//         dbo.collection("newsCol").findOneAndReplace({_id:'5cff3e51055ef7095cb7c80a'},myobj, function(err, res) {
-//           if (err) throw err;
-//           console.log("1 document Replace");
-//           db.close();
-//         // dbo.collection("newsCol").findOne({}, function(err, result) {
-//         //     if (err) throw err;
-//         //     console.log(result);
-//         //     db.close();
-//         //});
-//      });
-//   });
-// });
-//user ragistration
-
-app.post('/userRegistration', function (req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-    let newUserRegistration = {
-        //seller info goes in seller table
-        user_id: req.body.user_id,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        userDob: req.body.userDob,
-        userGender: req.body.userGender,
-        userEmail: req.body.userEmail,
-        userMnumber: req.body.userMnumber,
-        userPassword: req.body.userPassword,
-   
-    }
-
-
-    user_id = newUserRegistration.user_id;
-    firstName = newUserRegistration.firstName;
-    lastName = newUserRegistration.lastName;
-    userDob = newUserRegistration.userDob;
-    userGender = newUserRegistration.userGender;
-    userEmail = newUserRegistration.userEmail;
-    userMnumber = newUserRegistration.userMnumber;
-    userPassword = newUserRegistration.userPassword;
-
-    console.log("id "+user_id);
-    console.log("firstName "+firstName);
-    console.log("lastName "+lastName);
-    console.log("userDob "+userDob);
-    console.log("userGender "+userGender);
-    console.log("userEmail "+userEmail);
-    console.log("userMnumber "+userMnumber);
-    console.log("userPassword "+userPassword);
-
-
-    //query to store user registration form
-    var userRegistrationSQL = "INSERT INTO counselling_user (user_id, user_first_name, user_last_name, user_dob, user_gender, user_email, user_mobile_num, user_password) VALUES  ('" 
-    + user_id +"','" + firstName + "','" + lastName + "','" + userDob + "','" + userGender + "','" + userEmail + "', '"+userMnumber + "', '"+userPassword +"')";
-
-    con.query(userRegistrationSQL, function (err, result) {
-        if (err) {
-            res.json(firstName + " Registration Failed...");
-            throw err;
-        }
-        res.json(firstName + " Registration successfully...");
-        console.log("1 record inserted in seller table");
-    });
-
-
+couch.insert("ubuntudb",finalFilterAllData).then(({data, headers, status}) => {
+    console.log("data inserted : "+data);
+  //data is json response
+ // headers is an object with all response headers
+ // status is statusCode number
+}, err => {
+  console.log(err);
+ // either request error occured
+ // ...or err.code=EDOCCONFLICT if document with the same id already exists
 });
+ });
 
 
+ });
+});
+// //var obj4 = {business: [...cnnObj, ...jagranObj]};
 
 
+// //     MongoClient.connect(url, function(err, db) {
+// //         if (err) throw err;
+// //        // var dbo = db.db("newsdb2");
+// //        var myobj = JSON.parse(body);
 
-// request({
-//     uri: 'https://www.parsehub.com/api/v2/projects/tjsw87M5HOEb/last_ready_run/data',
-//     method: 'GET',
-//     gzip: true,
-//     qs: {
-//       api_key: "te7k5fGXivpr",
-//       format: "csv"
+// // couch.insert("newsdb",myobj).then(({data, headers, status}) => {
+// //      console.log("data : "+data);
+// //   // data is json response
+// //   // headers is an object with all response headers
+// //   // status is statusCode number
+// // }, err => {
+// //   // either request error occured
+// //   // ...or err.code=EDOCCONFLICT if document with the same id already exists
+// // });
+//  });
+      
+// //       //  myobj["Name"]="Mahesh";
+// //       //  myobj['theTeam']={"teamId":"4","status":"pending"};
+// //       //  console.log("new Obj : "+myobj.theTeam);
+// //         dbo.collection("newsCol").findOneAndReplace({_id:'5cff3e51055ef7095cb7c80a'},myobj, function(err, res) {
+// //           if (err) throw err;
+// //           console.log("1 document Replace");
+// //           db.close();
+// //         // dbo.collection("newsCol").findOne({}, function(err, result) {
+// //         //     if (err) throw err;
+// //         //     console.log(result);
+// //         //     db.close();
+// //         //});
+// //      });
+// //   });
+// // });
+// //user ragistration
+
+// app.post('/userRegistration', function (req, res) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+//     let newUserRegistration = {
+//         //seller info goes in seller table
+//         user_id: req.body.user_id,
+//         firstName: req.body.firstName,
+//         lastName: req.body.lastName,
+//         userDob: req.body.userDob,
+//         userGender: req.body.userGender,
+//         userEmail: req.body.userEmail,
+//         userMnumber: req.body.userMnumber,
+//         userPassword: req.body.userPassword,
+   
 //     }
-//   }, function(err, resp, body) {
-//     console.log("in my body "+body);
+
+
+//     user_id = newUserRegistration.user_id;
+//     firstName = newUserRegistration.firstName;
+//     lastName = newUserRegistration.lastName;
+//     userDob = newUserRegistration.userDob;
+//     userGender = newUserRegistration.userGender;
+//     userEmail = newUserRegistration.userEmail;
+//     userMnumber = newUserRegistration.userMnumber;
+//     userPassword = newUserRegistration.userPassword;
+
+//     console.log("id "+user_id);
+//     console.log("firstName "+firstName);
+//     console.log("lastName "+lastName);
+//     console.log("userDob "+userDob);
+//     console.log("userGender "+userGender);
+//     console.log("userEmail "+userEmail);
+//     console.log("userMnumber "+userMnumber);
+//     console.log("userPassword "+userPassword);
+
+
+//     //query to store user registration form
+//     var userRegistrationSQL = "INSERT INTO counselling_user (user_id, user_first_name, user_last_name, user_dob, user_gender, user_email, user_mobile_num, user_password) VALUES  ('" 
+//     + user_id +"','" + firstName + "','" + lastName + "','" + userDob + "','" + userGender + "','" + userEmail + "', '"+userMnumber + "', '"+userPassword +"')";
+
+//     con.query(userRegistrationSQL, function (err, result) {
+//         if (err) {
+//             res.json(firstName + " Registration Failed...");
+//             throw err;
+//         }
+//         res.json(firstName + " Registration successfully...");
+//         console.log("1 record inserted in seller table");
+//     });
+
+
+// });
+
+
+
+
+
+// // request({
+// //     uri: 'https://www.parsehub.com/api/v2/projects/tjsw87M5HOEb/last_ready_run/data',
+// //     method: 'GET',
+// //     gzip: true,
+// //     qs: {
+// //       api_key: "te7k5fGXivpr",
+// //       format: "csv"
+// //     }
+// //   }, function(err, resp, body) {
+// //     console.log("in my body "+body);
     
-//   });
+// //   });
 
 
 
@@ -343,6 +434,7 @@ app.get('/getNews', function (req, res) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
+    
     let obj1 = [
       {
        "heading": "Huawei exec says it has to 'wait a little bit longer' to become the world's biggest smartphone brand",
@@ -388,12 +480,13 @@ app.get('/getNews', function (req, res) {
       "detail": "mahesh 333 details"
     },
     {
-      "heading": "333 Why it's too early to hunker down for a recession",
+      "heading": "",
       "detail": "mahesh dhotre New ring PMI"
     },
     {
       "heading": "333 CEO says he wants to reach the next billion users, but has no plans to relaunch in China",
-      "detail": "akshay 3333 details"
+      "detail": "akshay 3333 details",
+      "source": "By Mahesh"
 
     }]
          
@@ -403,12 +496,13 @@ app.get('/getNews', function (req, res) {
       "detail": "mahesh 333 details"
     },
     {
-      "heading": "333 Why it's too early to hunker down for a recession",
+      "heading": "",
       "detail": "mahesh dhotre New ring PMI"
     },
     {
       "heading": "333 CEO says he wants to reach the next billion users, but has no plans to relaunch in China",
-      "detail": "akshay 3333 details"
+      "detail": "akshay 3333 details",
+      "source": "By Mahesh"
 
     }
   
@@ -416,19 +510,30 @@ app.get('/getNews', function (req, res) {
 
 
   ]
+  console.log(obj3);
+  var objFilter = obj3;
+  
+  let result = objFilter.filter(objFilter => {
+    return objFilter.source != undefined;
+  })
+  
+  console.log(result);
+  
+ // console.log(obj3);
  // var arr3 = (true, ...obj2, ...obj1);
  var obj5 = {business: [...obj2, ...obj1, ...obj3], politics:[...obj4]};
-  console.log(obj5);
+ obj5.business.forEach(function(element) { element.sentiments  = "number"; element.region  = "region"; element.country  = "india"; element.summary   = "summary"; element.sentimentDrivers  = ["word1", "word2", "word3"]; });
+  //console.log(obj5);
 
 
-    couch.get(dbName, viewUrl).then(function (data, headers, status) {
-      res.json(data.data.rows[0].value);
+  //  couch.get(dbName, viewUrl).then(function (data, headers, status) {
+  //    res.json(data.data.rows[0].value);
      // console.log("data is here : "+data.data.rows[0].value);
-  },
-    function (err) {
-      console.log(err);
-    });
-  });
+  // },
+  //   function (err) {
+  //     console.log(err);
+  //   });
+   });
  
     // MongoClient.connect(url, function(err, db) {
     //     if (err) throw err;

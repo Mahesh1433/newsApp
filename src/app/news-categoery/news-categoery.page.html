@@ -1,22 +1,155 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>FOLLOWING</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+   
+      <!-- local db slice:0:5 -->
+      <!-- dynamical categoery -->
+        <!--
+          <ion-row class="gridRow" align-items-center>
+          <ion-col align-self-center size="6" *ngFor="let key of objectKeys(items) | slice:0:6"  (click)="getNewsByCategoery(key)">
  
-    <ion-row class="gridRow" align-items-center>
+            <div class="avatar">
+              <ion-button class="imgBtn" size="large" color="light">
+                  <img class="gridColImg double-bounce1" src="/assets/{{key}}.jpg">
+               
+        
+                </ion-button>
+                <span text-center class="ColTitle">
+                  {{key}}
+                   </span>
+              </div>
+
+        
+              
+             
+        </ion-col>
       
-        <ion-col class="" align-self-center size="6" *ngFor="let key of objectKeys(items) | slice:0:5"  (click)="getNewsByCategoery(key)">
+      </ion-row>
+      -->
+      <ion-row class="gridRow" align-items-center>
+        <ion-col align-self-center size="6"  (click)="getNewsByCategoery('Breaking')">
+ 
+          <div class="avatar">
+            <ion-button class="imgBtn" size="large" color="light">
+                <img class="gridColImg double-bounce1" src="/assets/Breaking.jpg">
+             
+      
+              </ion-button>
+              <span text-center class="ColTitle">
+                Breaking
+                 </span>
+            </div>
+
+      
+            
+           
+      </ion-col>
+    
+      <ion-col align-self-center size="6" (click)="getNewsByCategoery('Business')">
+ 
+        <div class="avatar">
+          <ion-button class="imgBtn" size="large" color="light">
+              <img class="gridColImg double-bounce1" src="/assets/Business.jpg">
+           
+    
+            </ion-button>
+            <span text-center class="ColTitle">
+              Business
+               </span>
+          </div>
+
+    
+          
+         
+    </ion-col>
+
+    <ion-col align-self-center size="6" (click)="getNewsByCategoery('Entertainment')">
+ 
+      <div class="avatar">
+        <ion-button class="imgBtn" size="large" color="light">
+            <img class="gridColImg double-bounce1" src="/assets/Entertainment.jpg">
+         
+  
+          </ion-button>
+          <span text-center class="ColTitle">
+            Entertainment
+             </span>
+        </div>
+
+  
         
        
-          <img class="gridColImg double-bounce1" src="/assets/{{key}}.jpg">
-         
-         <p class="ColTitle">{{key}}</p>
-        
-        </ion-col>
-        
+  </ion-col>
+
+  <ion-col align-self-center size="6" (click)="getNewsByCategoery('Politics')">
+ 
+    <div class="avatar">
+      <ion-button class="imgBtn" size="large" color="light">
+          <img class="gridColImg double-bounce1" src="/assets/Politics.jpg">
+       
+
+        </ion-button>
+        <span text-center class="ColTitle">
+          Politics
+           </span>
+      </div>
+
+
+      
+     
+</ion-col>
+
+</ion-row>
+<ion-row class="gridRow" align-items-center>
+<ion-col align-self-center size="6" (click)="getNewsByCategoery('Sport')">
+ 
+  <div class="avatar">
+    <ion-button class="imgBtn" size="large" color="light">
+        <img class="gridColImg double-bounce1" src="/assets/Sport.jpg">
+     
+
+      </ion-button>
+      <span text-center class="ColTitle">
+        Sport
+         </span>
+    </div>
+
+
+    
+   
+</ion-col>
+
+<ion-col align-self-center size="6" (click)="getNewsByCategoery('Technology')">
+ 
+  <div class="avatar">
+    <ion-button class="imgBtn" size="large" color="light">
+        <img class="gridColImg double-bounce1" src="/assets/Technology.jpg">
+     
+
+      </ion-button>
+      <span text-center class="ColTitle">
+        Technology
+         </span>
+    </div>
+
+
+    
+   
+</ion-col>
+</ion-row>  
       <!-- </ion-row>
       <ion-row class="gridRow" align-items-center>
           <ion-col align-self-center size="6">
@@ -34,8 +167,10 @@
              <p class="ColTitle">Technology</p>
             </ion-col>
             -->
-          </ion-row>  
+         
+      
         <!-- Apologies for using my own face, was the only image I could think of at the time! -->
-    
+       
+      
        
 </ion-content>

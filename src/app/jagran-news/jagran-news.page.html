@@ -1,12 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>JagranNews</ion-title>
+    <ion-title>News</ion-title>
   </ion-toolbar>
+ 
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
 
-    <ion-list no-lines>
+  <!-- <ion-list no-lines>
 
         <ion-item-sliding >
     
@@ -18,7 +27,7 @@
           </ion-item-sliding>
           </ion-list>
 
-    <ion-item *ngFor="let key of objectKeys(items) | slice:1:2">
+    <ion-item *ngFor="let key of objectKeys(items) | slice:2:5">
         <ion-label>
             {{key}}
             </ion-label>
@@ -29,7 +38,7 @@
     <ion-slide *ngFor="let entertainment of entertainment">
      
     <ion-card class="ion-text-left">
-        <!-- <ion-card> -->
+      
         <ion-card-header>
           
           <ion-card-title style="font-size: 16px">{{entertainment.heading}}</ion-card-title>
@@ -59,7 +68,7 @@
   <ion-slide   *ngFor="let politics of politics">
    
   <ion-card class="ion-text-left">
-      <!-- <ion-card> -->
+     
       <ion-card-header>
       
         <ion-card-title  style="font-size: 16px">{{politics.Heading}}</ion-card-title>
@@ -88,7 +97,7 @@
     <ion-slide   *ngFor="let cricket of cricket">
      
     <ion-card class="ion-text-left">
-        <!-- <ion-card> -->
+      
         <ion-card-header>
         
           <ion-card-title  style="font-size: 16px">{{cricket.heading}}</ion-card-title>
@@ -115,7 +124,7 @@
       <ion-slide *ngFor="let business of business">
        
       <ion-card class="ion-text-left">
-          <!-- <ion-card> -->
+         
           <ion-card-header>
           
             <ion-card-title  style="font-size: 16px">{{business.heading}}</ion-card-title>
@@ -142,7 +151,7 @@
       <ion-slide   *ngFor="let technology of technology">
        
       <ion-card class="ion-text-left">
-          <!-- <ion-card> -->
+        
           <ion-card-header>
           
             <ion-card-title  style="font-size: 16px">{{technology.heading}}</ion-card-title>
@@ -156,8 +165,160 @@
         
         </ion-card>
       </ion-slide>
-</ion-slides>
+</ion-slides> -->
+  
 
+    <!-- </ion-row>
+      <ion-row class="gridRow" align-items-center>
+          <ion-col align-self-center size="6">
+          <img class="gridColImg" src="/assets/cricket.jpg">
+           <p class="ColTitle">Cricket</p>
+          </ion-col>
+          <ion-col align-self-center size="6">
+              <img class="gridColImg" src="/assets/business.jpg">
+              <p class="ColTitle">Business</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="gridRow" align-items-center>
+            <ion-col align-self-center size="6">
+            <img class="gridColImg" src="/assets/technology.jpg">
+             <p class="ColTitle">Technology</p>
+            </ion-col>
+            -->
+ 
+  <!-- Apologies for using my own face, was the only image I could think of at the time! -->
+
+  <ion-item>
+      <ion-label>
+         Breaking
+          </ion-label>
+        </ion-item>
+  <ion-slides [options]="slideOpts">
+
+    <ion-slide *ngFor="let breaking of breaking | slice:0:50;">
+        
+      <ion-card class="ion-text-left">
+
+        <ion-card-header>
+           
+          <ion-card-title style="font-size: 16px">{{breaking.heading}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content (click)="openDetailsWithState(breaking.detail,breaking.heading,'Breaking')" class="textWrap">
+
+          {{breaking.detail}}
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+<!--   
+  <ion-item>
+      <ion-label>
+         Entertainment
+          </ion-label>
+        </ion-item>
+  <ion-slides [options]="slideOpts">
+      
+
+    <ion-slide *ngFor="let entertainment of entertainment">
+      
+      <ion-card class="ion-text-left">
+
+        <ion-card-header>
+           
+          <ion-card-title style="font-size: 16px">{{entertainment.heading}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content (click)="openDetailsWithState(entertainment.detail,entertainment.heading,'Entertainment')" class="textWrap">
+
+          {{entertainment.detail}}
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+ 
+  <ion-item>
+      <ion-label>
+         Business
+          </ion-label>
+        </ion-item>
+  <ion-slides [options]="slideOpts">
+     
+    <ion-slide *ngFor="let business of business">
+
+      <ion-card class="ion-text-left">
+
+        <ion-card-header>
+
+          <ion-card-title style="font-size: 16px">{{business.heading}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content (click)="openDetailsWithState(business.detail,business.heading,'Business')" class="textWrap">
+
+          {{business.detail}}
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item>
+      <ion-label>
+         Technology
+          </ion-label>
+        </ion-item>
+  <ion-slides [options]="slideOpts">
+   
+    <ion-slide *ngFor="let technology of technology">
+
+      <ion-card class="ion-text-left">
+
+        <ion-card-header>
+
+          <ion-card-title style="font-size: 16px">{{technology.heading}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content (click)="openDetailsWithState(technology.detail,technology.heading,'Technology')" class="textWrap">
+
+          {{technology.detail}}
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item>
+      <ion-label>
+         Sport
+          </ion-label>
+        </ion-item>
+  <ion-slides [options]="slideOpts">
+     
+
+    <ion-slide *ngFor="let sport of sport">
+
+      <ion-card class="ion-text-left">
+
+        <ion-card-header>
+
+          <ion-card-title style="font-size: 16px">{{sport.heading}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content (click)="openDetailsWithState(sport.detail,sport.heading,'Sport')" class="textWrap">
+
+          {{sport.detail}}
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides> -->
 
 </ion-content>
 <!-- <ion-header>

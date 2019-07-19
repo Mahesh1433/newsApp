@@ -1,18 +1,18 @@
-.backgroundImg{
+// .backgroundImg{
     
-    height: 200px;
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-}
-.backgroundImg1{
-    background-image: url("/assets/Entertainment.jpg");
+//     height: 200px;
+//     background-position: center; /* Center the image */
+//     background-repeat: no-repeat; /* Do not repeat the image */
+//     background-size: cover; /* Resize the background image to cover the entire container */
+// }
+// .backgroundImg1{
+//     background-image: url("/assets/Entertainment.jpg");
    
-}
-.backgroundImg2{
-    background-image: url("/assets/politics.jpg");
+// }
+// .backgroundImg2{
+//     background-image: url("/assets/politics.jpg");
    
-}
+// }
 .gridRow{
     padding: 2px 2px 0px 2px;
 }
@@ -21,234 +21,89 @@
     height: auto;
 }
 .ColTitle{
-    border: 2px solid #000000;
+    border: 1px solid #000000;
     background-color: #000000;
     color: white;
     margin: 0;
-  
+    width: 100%;
+  float: left;
     text-align: center;
    
 }
-.card {
+.imgBtn{
+  height: auto;
+}
+// .card {
   
-    /* Center card on screen (presentation only) */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -146px;
-    margin-left: -150px;
+//     /* Center card on screen (presentation only) */
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     margin-top: -146px;
+//     margin-left: -150px;
     
-    /* Set max dimensions of the image for responsive */
-    max-height: 292px;
-    max-width: 300px;
+//     /* Set max dimensions of the image for responsive */
+//     max-height: 292px;
+//     max-width: 300px;
     
-    /* Image will fill half the screen if window <600px wide */
-    width: 50%;
+//     /* Image will fill half the screen if window <600px wide */
+//     width: 50%;
     
-    /* Set image to 100% of container to scale down at lower screen widths */
-    img {
-      width: 100%;
-    }
-  }
-  
-  /* Flip animation container, keeps perspective */
-  .flip-container {
-    -webkit-perspective: 1000;
-    -moz-perspective: 1000;
-    -ms-perspective: 1000;
-    perspective: 1000;
-  }
-  
-  /* Set animation variables */
-  .front, .back {
-    -webkit-animation-duration: 15s;
-    -moz-animation-duration: 15s;
-    -ms-animation-duration: 15s;
-    animation-duration: 15s;
-  
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-  
-    -webkit-animation-iteration-count: infinite;
-    -moz-animation-iteration-count: infinite;
-    -ms-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-  
-    -webkit-animation-timing-function: ease;
-    -moz-animation-timing-function: ease;
-    -ms-animation-timing-function: ease;
-    animation-timing-function: ease;
-  
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-fill-mode: forwards;
-    -ms-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-  }
-  
-  /* Call the animations for each side of the card */
-  .front {
-    -webkit-animation-name: cardFlipFront;
-    -moz-animation-name: cardFlipFront;
-    -ms-animation-name: cardFlipFront;
-    animation-name: cardFlipFront;
-  }
-  
-  .back {
-    -webkit-animation-name: cardFlipBack;
-    -moz-animation-name: cardFlipBack;
-    -ms-animation-name: cardFlipBack;
-    animation-name: cardFlipBack;
-  }
-  
-  /* We have two seperate @keyframe animations for each side of the card so we can get this working in IE */
-  
-  /* This one animates the front card */
-  @keyframes cardFlipFront {
-    0% {
-      -moz-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    22.5% {
-      -moz-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    27.5% {
-      -moz-transform: rotateY(180deg);
-      -ms-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
-    72.5% {
-      -moz-transform: rotateY(180deg);
-      -ms-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
-    77.5% {
-      -moz-transform: rotateY(0deg);
-      -o-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    100% {
-      -moz-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-  }
-  
-  /* This one animates the front card in webkit */
-  @-webkit-keyframes cardFlipFront {
-    0% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    22.5% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    27.5% {
-      -webkit-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
-    72.5% {
-      -webkit-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
-    77.5% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    100% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-  }
-  
-  /* This one animates the back card */
-  @keyframes cardFlipBack {
-    0% {
-      -moz-transform: rotateY(-180deg);
-      -ms-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    22.5% {
-      -moz-transform: rotateY(-180deg);
-      -ms-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    27.5% {
-      -moz-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    72.5% {
-      -moz-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    77.5% {
-      -moz-transform: rotateY(-180deg);
-      -ms-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    100% {
-      -moz-transform: rotateY(-180deg);
-      -ms-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-  }
-  
-  /* This one animates the back card in webkit */
-  @-webkit-keyframes cardFlipBack {
-    0% {
-      -webkit-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    22.5% {
-      -webkit-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    27.5% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    72.5% {
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-    77.5% {
-      -webkit-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    100% {
-      -webkit-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-  }
-  
-  /* Hide back of card during swap */
-  .front, .back {
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  /* Front card stacked above the back card */
-  .front {
-    z-index: 2;
-  }
-  
-  /* The back, initially hidden, card */
-  .back {
-    -webkit-transform: rotateY(-180deg);
-    -moz-transform: rotateY(-180deg);
-    -ms-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
-  }
+//     /* Set image to 100% of container to scale down at lower screen widths */
+//     img {
+//       width: 100%;
+//     }
+//   }
+//   img {
+//     -webkit-animation: anim 10s infinite linear;
+//     animation: anim 5s infinite linear;
+// }
+
+
+// @-webkit-keyframes anim {
+//     from {-webkit-transform: rotateY(0deg);}
+//     to {-webkit-transform: rotateY(360deg);}
+// }
+
+// @keyframes anim {
+//     from {transform: rotateY(0deg);}
+//     to {transform: rotateY(360deg);}
+// }
+
+
+
+// span {
+
+//   //font: 700 4em/1 "Oswald", sans-serif;
+//   letter-spacing: 0;
+//   //padding: .25em 0 .325em;
+//   display: block;
+//   margin: 0 auto;
+//   text-shadow: 0 0 80px rgba(255,255,255,.5);
+
+// /* Clip Background Image */
+
+//   background: url(http://f.cl.ly/items/010q3E1u3p2Q0j1L1S1o/animated_text_fill.png) repeat-y;
+//   -webkit-background-clip: text;
+//   background-clip: text;
+
+// /* Animate Background Image */
+
+//   -webkit-text-fill-color: transparent;
+//   -webkit-animation: aitf 80s linear infinite;
+
+// /* Activate hardware acceleration for smoother animations */
+
+//   -webkit-transform: translate3d(0,0,0);
+//   -webkit-backface-visibility: hidden;
+
+// }
+
+
+/* Animate Background Image */
+
+// @-webkit-keyframes aitf {
+// 0% { background-position: 0% 50%; }
+// 100% { background-position: 100% 50%; }
+// }
+
